@@ -9,7 +9,7 @@ on:
             - master
 
 jobs:
-  build-and-test:
+  build-test-deploy-on-success:
     runs-on: ubuntu-latest
 
     services:
@@ -75,20 +75,9 @@ jobs:
       env:
         DB_DATABASE: secretlab_tech_exercise_testing
 
-  deploy:
-    needs: build-and-test
-    runs-on: ubuntu-latest
-    if: success()
-
-    steps:
-    - name: Checkout Code
-      uses: actions/checkout@v2
-
-    - name: Set up Railway CLI
-      run: curl -sSL https://cli.railway.app | bash
-
-    - name: Login to Railway
-      run: railway login --token 6d1dfa63-62b1-453a-b3e5-d6b650d0c601  # Store your Railway API token in GitHub Secrets
-
     - name: Deploy to Railway
-      run: railway up --production
+      if: success()  # Only deploy if tests pass
+      uses: railwayapp/railway-action@v1
+      with:
+        railway_token: 6d1dfa63-62b1-453a-b3e5-d6b650d0c601
+        project_id: cb151766-899f-4a16-99c4-36e1e6cf06fb

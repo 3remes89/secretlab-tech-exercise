@@ -48,15 +48,15 @@ jobs:
     - name: Install Dependencies
       run: composer install --no-interaction
 
-    - name: Wait for MySQL to Be Ready
-      run: |
-          for i in {30..0}; do
-              if mysqladmin ping -h127.0.0.1 --silent; then
-                  break
-              fi
-              echo 'Waiting for MySQL to be ready...'
-              sleep 1
-          done
+    # - name: Wait for MySQL to Be Ready
+    #   run: |
+    #       for i in {30..0}; do
+    #           if mysqladmin ping -h127.0.0.1 --silent; then
+    #               break
+    #           fi
+    #           echo 'Waiting for MySQL to be ready...'
+    #           sleep 1
+    #       done
 
     - name: Copy .env
       run: |
@@ -71,8 +71,8 @@ jobs:
     - name: Generate Application Key
       run: php artisan key:generate
 
-    - name: Run Migrations
-      run: php artisan migrate --force
+    # - name: Run Migrations
+    #   run: php artisan migrate --force
 
     - name: Run Tests
       run: php artisan test

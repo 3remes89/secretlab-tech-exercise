@@ -66,7 +66,6 @@ jobs:
 
     - name: Run Migrations for Production
       run: |
-        php artisan session:table
         php artisan migrate --force
       env:
         DB_CONNECTION: mysql

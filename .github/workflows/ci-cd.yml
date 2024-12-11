@@ -42,25 +42,12 @@ jobs:
     - name: Install Dependencies
       run: composer install --no-interaction
 
-    # - name: Wait for MySQL to Be Ready
-    #   run: |
-    #       for i in {30..0}; do
-    #           if mysqladmin ping -h127.0.0.1 --silent; then
-    #               break
-    #           fi
-    #           echo 'Waiting for MySQL to be ready...'
-    #           sleep 1
-    #       done
-
     - name: Copy .env
       run: |
-          echo "Copying .env.ci to .env..."
           cp .env.ci .env
-          echo "Contents of .env:"
-          cat .env
 
-    - name: Reset APP_KEY
-      run: sed -i '/^APP_KEY=/d' .env
+    # - name: Reset APP_KEY
+    #   run: sed -i '/^APP_KEY=/d' .env
 
     - name: Generate Application Key
       run: php artisan key:generate

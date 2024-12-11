@@ -33,6 +33,14 @@ jobs:
           restore-keys: |
               composer-
 
+    - name: Cache PHP Extensions
+      uses: actions/cache@v2
+      with:
+        path: /tmp/pear
+        key: php-extensions-${{ runner.os }}-${{ hashFiles('**/*.php') }}
+        restore-keys: |
+            php-extensions-${{ runner.os }}-
+
     - name: Install PHP
       uses: shivammathur/setup-php@v2
       with:

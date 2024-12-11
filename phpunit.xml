@@ -31,7 +31,7 @@
 
         <!-- Database connection for testing -->
         <env name="DB_CONNECTION" value="mysql"/>
-        <env name="DB_DATABASE" value="secretlab_tech_exercise"/>
+        <env name="DB_DATABASE" value="secretlab_tech_exercise_testing"/>
         <env name="DB_USERNAME" value="root"/>
         <env name="DB_PASSWORD" value=""/>
     </php>

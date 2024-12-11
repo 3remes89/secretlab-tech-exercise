@@ -196,9 +196,12 @@ class ExerciseTest extends TestCase
         }
 
         $response = $this->getJson('/api/getAll');
-
         $response->assertStatus(200);
-        $jsonData = $response->json('data');
+
+        $responseData = $response->json();
+        dump($responseData);
+        $jsonData = $responseData['data'] ?? null;
+
         $this->assertCount(1000, $jsonData);
     }
 

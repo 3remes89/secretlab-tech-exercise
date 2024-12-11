@@ -17,17 +17,21 @@ jobs:
         uses: actions/checkout@v2
 
     -   name: Cache Composer Dependencies
-        uses: actions/cache
+        uses: actions/cache@v3
         with:
             path: vendor
-            key: composer-${{ hashFiles('**/composer.lock') }}
+            key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json', '**/composer.lock') }}
             restore-keys: |
-                composer-
+                ${{ runner.os }}-composer-
 
     -   name: Install PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@v3
         with:
             php-version: 8.2
+            tools: composer
+
+    -   name: Validate Composer Installation
+        run: composer validate
 
     -   name: Install Dependencies
         run: composer install --no-interaction
@@ -40,4 +44,4 @@ jobs:
             cp .env.ci .env
 
     -   name: Run Tests
-        run: php artisan test
+        run: php artisan test --verbose

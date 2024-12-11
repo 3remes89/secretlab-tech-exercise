@@ -64,6 +64,10 @@ jobs:
         php artisan route:cache
         php artisan view:cache
 
+    - name: Run Migrations for Production
+      run: |
+          php artisan migrate
+
     - name: Create and Migrate Test Database
       run: |
         echo "Creating and migrating the test database..."

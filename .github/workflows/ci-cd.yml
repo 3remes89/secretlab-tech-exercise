@@ -12,6 +12,19 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
+    services:
+      mysql:
+        image: mysql:8.0
+        ports:
+          - 3306:3306
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+        options: >
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
     steps:
     - name: Checkout Code
       uses: actions/checkout@v2
@@ -28,9 +41,20 @@ jobs:
       uses: shivammathur/setup-php@v2
       with:
           php-version: 8.2
+          extensions: mbstring, pdo, pdo_mysql
 
     - name: Install Dependencies
       run: composer install --no-interaction
+
+    - name: Wait for MySQL to Be Ready
+      run: |
+          for i in {30..0}; do
+              if mysqladmin ping -h127.0.0.1 --silent; then
+                  break
+              fi
+              echo 'Waiting for MySQL to be ready...'
+              sleep 1
+          done
 
     - name: Copy .env
       run: |
@@ -44,6 +68,9 @@ jobs:
 
     - name: Generate Application Key
       run: php artisan key:generate
+
+    - name: Run Migrations
+      run: php artisan migrate --force
 
     - name: Run Tests
       run: php artisan test

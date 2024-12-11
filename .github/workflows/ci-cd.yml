@@ -75,7 +75,7 @@ jobs:
       env:
         DB_DATABASE: secretlab_tech_exercise_testing
 
-    - name: Deploy to Railway
-      run: |
-        git remote add railway https://git.railway.app/3remes89/secretlab-tech-exercise.git
-        git push railway master
+    # - name: Deploy to Railway
+    #   run: |
+    #     git remote add railway https://git.railway.app/3remes89/secretlab-tech-exercise.git
+    #     git push railway master

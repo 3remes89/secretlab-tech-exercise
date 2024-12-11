@@ -16,8 +16,8 @@ jobs:
         mysql:
             image: mysql:8.0
             env:
-              MYSQL_ROOT_PASSWORD: 
-              MYSQL_DATABASE: secretlab_tech_exercise
+                MYSQL_ALLOW_EMPTY_PASSWORD: yes
+                MYSQL_DATABASE: secretlab_tech_exercise
             ports:
                 - 3306:3306
 

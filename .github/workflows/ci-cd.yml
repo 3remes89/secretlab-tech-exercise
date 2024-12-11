@@ -57,6 +57,13 @@ jobs:
     - name: Generate Application Key
       run: php artisan key:generate
 
+    - name: Optimize Laravel
+      run: |
+        php artisan optimize
+        php artisan config:cache
+        php artisan route:cache
+        php artisan view:cache
+
     - name: Create and Migrate Test Database
       run: |
         echo "Creating and migrating the test database..."
@@ -68,3 +75,7 @@ jobs:
       env:
         DB_DATABASE: secretlab_tech_exercise_testing
 
+    - name: Deploy to Railway
+      run: |
+        git remote add railway https://git.railway.app/3remes89/secretlab-tech-exercise.git
+        git push railway master

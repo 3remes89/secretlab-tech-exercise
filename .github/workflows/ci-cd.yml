@@ -66,5 +66,5 @@ jobs:
     - name: Run Tests
       run: php artisan test
       env:
-        DB_DATABASE: secretlab_tech_exercise
+        DB_DATABASE: secretlab_tech_exercise_testing
 

@@ -10,4 +10,5 @@ if ($uri !== '/' && file_exists(__DIR__.'/public'.$uri)) {
 }
 
 require_once __DIR__.'/public/index.php';
-$port = env('PORT', 8080);
+$port = getenv('PORT') ?: 8000;
+$host = '0.0.0.0';

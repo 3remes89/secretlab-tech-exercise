@@ -41,14 +41,7 @@ jobs:
 
     -   name: Copy .env
         run: |
-            if [ ! -f ".env.ci" ]; then
-                echo "Creating default .env file."
-                echo "APP_KEY=" > .env
-            else
-                echo "Copying .env.ci to .env."
-                cp .env.ci .env
-            fi
-            ls -al
+            cp .env.example .env
 
 
     -   name: Run Tests

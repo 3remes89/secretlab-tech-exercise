@@ -86,7 +86,7 @@ class ExerciseTest extends TestCase
 
         $response->assertStatus(404);
         $response->assertJson([
-            'message' => 'Key not found'
+            'message' => 'Key not found.'
         ]);
     }
 
@@ -125,20 +125,19 @@ class ExerciseTest extends TestCase
     {
         $response = $this->getJson('/api/getValueAt/mykey/invalidtimestamp');
 
-        $response->assertStatus(422);
+        $response->assertStatus(400);
         $response->assertJsonValidationErrors('timestamp');
     }
 
     #[Test]
     public function get_key_value_by_timestamp_with_non_existent_key_at_timestamp()
     {
-        // Assume no key exists at the given timestamp
         $timestamp = now()->timestamp;
         $response = $this->getJson('/api/getValueAt/nonexistentkey/' . $timestamp);
 
         $response->assertStatus(404);
         $response->assertJson([
-            'message' => 'Key not found at given timestamp'
+            'message' => 'No value found for the specified key and timestamp.'
         ]);
     }
 

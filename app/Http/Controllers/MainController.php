@@ -13,7 +13,7 @@ class MainController extends Controller
     {
         $validated = $request->validate([
             'key' => 'required|string',
-            'value' => 'required',
+            'value' => 'required|json',
         ]);
 
         $main = Main::create([
@@ -21,6 +21,10 @@ class MainController extends Controller
             'value' => $validated['value'],
         ]);
 
+        if(!$main){
+            return response()->json(['message' => 'Invalid key or value format.'], 422);
+
+        }
         return response()->json(['message' => 'Key-value pair saved successfully.', 'data' => $main], 201);
     }
 
@@ -42,7 +46,7 @@ class MainController extends Controller
         if (!is_numeric($timestamp)) {
             return response()->json(['message' => 'Invalid timestamp.'], 400);
         }
-        
+
         $main = Main::where('key', $mykey)
                     ->where('created_at', '<=', date('Y-m-d H:i:s', $timestamp))
                     ->latest()

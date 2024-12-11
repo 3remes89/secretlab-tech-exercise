@@ -199,10 +199,7 @@ class ExerciseTest extends TestCase
         $response->assertStatus(200);
 
         $responseData = $response->json();
-        dump($responseData);
-        $jsonData = $responseData['data'] ?? null;
-
-        $this->assertCount(1000, $jsonData);
+        $this->assertCount(1000, $responseData);
     }
 
     #[Test]

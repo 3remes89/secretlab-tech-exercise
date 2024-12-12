@@ -28,11 +28,6 @@ class Kernel extends HttpKernel
         'web' => [
             \App\Http\Middleware\VerifyCsrfToken::class,
         ],
-
-        'api' => [
-            \Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
-            \Illuminate\Routing\Middleware\SubstituteBindings::class,
-        ],
     ];
 
     /**
@@ -43,12 +38,5 @@ class Kernel extends HttpKernel
      * @var array<string, class-string|string>
      */
     protected $middlewareAliases = [
-        'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'auth.session' => \Illuminate\Session\Middleware\AuthenticateSession::class,
-        'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
-        'can' => \Illuminate\Auth\Middleware\Authorize::class,
-        'password.confirm' => \Illuminate\Auth\Middleware\RequirePassword::class,
-        'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
     ];
 }

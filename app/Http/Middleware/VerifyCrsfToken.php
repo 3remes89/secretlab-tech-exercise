@@ -13,7 +13,8 @@ class VerifyCsrfToken
      * @var array<int, string>
      */
     protected $except = [
-        "api/setKey"
+        // "api/setKey"
+        "https://secretlab-tech-exercise-production.up.railway.app/api/setKey"
     ];
 
     public function handle(Request $request, Closure $next)

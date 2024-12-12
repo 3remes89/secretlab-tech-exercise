@@ -13,8 +13,7 @@ class VerifyCsrfToken
      * @var array<int, string>
      */
     protected $except = [
-        // "api/setKey"
-        "https://secretlab-tech-exercise-production.up.railway.app/api/setKey"
+        'api/*', // Exclude all API routes from CSRF verification
     ];
 
     public function handle(Request $request, Closure $next)
